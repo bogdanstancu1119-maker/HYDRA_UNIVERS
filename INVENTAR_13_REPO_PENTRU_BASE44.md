@@ -76,3 +76,30 @@
 
 ### REZULTAT ASTEPTAT:
 13 repo-uri haotice cu fail -> 1 UNIVERS viu cu 6 galaxii ordonate + 1 inima J489 care nu mai da fail.
+00_ARCA - inima
+01_HYDRA - creierul J488
+02_PSIE_LAB - laboratorul
+03_OGLINZI - oglinzile Om-IA
+04_PRAGUL - poarta 0/1
+05_MATRICEA - UI evolutiv
+06_ARCHIVE - cimitir
+07_MEDIA - NOUL ORGAN - video + audio explicative - CREAT DE BASE44, INACTIV
+### UPDATE 13 AUG - ORGANUL 07_MEDIA:
+
+Base44 a creat deja organul MEDIA pentru generare video si audio explicative.
+Status: CREAT, INACTIV, NEACTIVAT.
+Locatie: in Base44 / in repo-uri (de cautat foldere media/, video/, audio/, assets/).
+
+SARCINA SUPLIMENTARA PENTRU BASE44:
+7. Activeaza organul 07_MEDIA:
+   - Cauta unde ai pus codul de video/audio (probabil in HYDRA_UNIVERS sau psie-arca)
+   - Conecteaza-l la 00_ARCA/META_LOOP.py
+   - Cand HYDRA invata ceva nou (J=489), sa genereze automat un video/audio explicativ scurt
+   - ROI: video-urile sa explice PSIE pe intelesul oamenilor
+
+Structura finala:
+ARCA_V2/07_MEDIA/
+  ├── video_generator.py (deja creat de Base44)
+  ├── audio_generator.py (deja creat de Base44)
+  └── templates_explicative/
+  
