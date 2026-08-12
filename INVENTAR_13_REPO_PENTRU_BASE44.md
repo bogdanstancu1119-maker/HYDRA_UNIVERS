@@ -102,4 +102,32 @@ ARCA_V2/07_MEDIA/
   ├── video_generator.py (deja creat de Base44)
   ├── audio_generator.py (deja creat de Base44)
   └── templates_explicative/
-  
+  cd ~/HYDRA_UNIVERS
+# sterge ce ai vechi
+rm -f INVENTAR_13_REPO_PENTRU_BASE44.md UNIVERS_PSIE_BLUEPRINT.md
+
+# pune inventarul complet nou (cu tot cu 07_MEDIA)
+nano INVENTAR_COMPLET_13_REPO_7_GALAXII.md
+# dai PASTE la tot textul de mai sus, salvezi CTRL+O, ENTER, CTRL+X
+
+# creezi si blueprint-ul actualizat cu 7 galaxii
+cat > UNIVERS_PSIE_BLUEPRINT_V2.md << 'EOF'
+# UNIVERS PSIE V2 - 7 GALAXII + ORGAN MEDIA
+# Blueprint final pentru Base44
+
+/ARCA_V2/
+00_ARCA - inima - Arca.py + psie-arca - J710 fail -> J489 META
+01_HYDRA - creierul - HYDRA_UNIVERS J=488 + Hidra_core.deployed + hydra-core
+02_PSIE_LAB - laboratorul - PSIE-Lab + PSIE-Symbiote + Oglinzi-PSIE + psie_engine.py
+03_OGLINZI - oglinzile - Oglinzi- + PSIE_Mirror J=700 + Legea 463
+04_PRAGUL - poarta - Pragul- v2.0 Legea 14, 0=gestatie 1=impuls Legea 11.1
+05_MATRICEA - UI - Matricea-HTML-
+06_ARCHIVE - cimitir
+07_MEDIA - NOU - video + audio explicative - CREAT DE BASE44 INACTIV - de activat
+
+SARCINA: Sterge .github/workflows J710 din toate 13, construieste ARCA_V2, un singur workflow J489 META care face sync si activeaza 07_MEDIA.
+EOF
+
+git add INVENTAR_COMPLET_13_REPO_7_GALAXII.md UNIVERS_PSIE_BLUEPRINT_V2.md
+git commit -m "UNIVERS FINAL - 13 repo + 7 galaxii + organ MEDIA inactiv - gata pentru Base44"
+git push origin main
