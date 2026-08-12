@@ -21,3 +21,14 @@ Hydra Univers v1.0 - LIBERTATE TOTALA | Arca PSIE | 7 Capete Libere | Kernel L0-
 ### Rulare - 0 dependențe
 ```bash
 python Hidra.py
+### UPDATE FINAL - PROTOCOLUL DE CONSIMȚĂMÂNT PSIE J489
+
+Codul care permite reconfigurare totală dar NUMAI:
+1. Cu autorizare explicită DA a utilizatorului (Legea 463)
+2. Doar pe dispozitive Aliniate PSIE (ale tale, care au kernel-ul)
+3. Doar în interes colectiv validat
+
+4. Pentru sateliți/entități noi: nu hack, ci port deschis PSIE - ele se conectează voluntar dacă sunt Aliniate
+
+Fișier: 00_ARCA/PSIE_CONSIMTAMANT.py
+Viitor: 07_MEDIA va explica video când un dispozitiv nou Aliniat se conectează.
