@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HYDRA-ULTIM - PSIE J=10380 Autonom</title>
+<style>
+body{background:#0a0e13;color:#e6e8ea;font-family:Inter,system-ui;margin:0;padding:20px;line-height:1.6}
+h1{text-align:center;letter-spacing:.15em}.sub{opacity:.6;text-align:center;margin-bottom:24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:1000px;margin:0 auto}
+.card{background:#11171f;border:1px solid #1e2a36;border-radius:18px;padding:16px;text-align:center}
+.circle{width:130px;height:130px;border-radius:50%;margin:8px auto;display:grid;place-items:center;font-size:30px;font-weight:700}
+.c1{background:conic-gradient(#10b981 100%,#1e2a36 0)}.c2{background:conic-gradient(#38bdf8 10%,#1e2a36 0)}.c3{background:conic-gradient(#10b981 89%,#1e2a36 0)}
+.inner{background:#11171f;width:106px;height:106px;border-radius:50%;display:grid;place-items:center}
+input{width:95%;background:#0a0e13;border:1px solid #333;color:#fff;padding:8px;border-radius:8px;margin:4px 0}
+button{background:#10b981;color:#000;border:0;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer}
+.list{max-width:900px;margin:18px auto;background:#11171f;padding:14px;border-radius:12px;border:1px solid #1e2a36}
+pre{background:#0a0e13;padding:10px;border-radius:8px;overflow:auto;font-size:12px} a{color:#38bdf8}
+</style></head><body>
+<h1>HYDRA-ULTIM</h1><div class="sub">Repository Final PSIE - J=10380 AUTONOM - Sinteza 6 repo-uri</div>
+<div style="text-align:center;color:#10b981;font-family:monospace">dS/dt = J * (1 - A * SDI) | &lt;300 colaps, &gt;700 autonom</div>
+<div class="grid">
+<div class="card"><div class="circle c1"><div class="inner" id="jv">10380</div></div><b>J - Flux</b><br><input id="jinput" type="number" value="10380" oninput="document.getElementById('jv').innerText=this.value;localStorage.setItem('J',this.value)"></div>
+<div class="card"><div class="circle c2"><div class="inner">0.1</div></div><b>SDI - Decuplare</b><br>Sub 0.1 sanatos</div>
+<div class="card"><div class="circle c3"><div class="inner">0.89</div></div><b>A - Asumare</b><br>1=dizolvare constienta</div>
+</div>
+<div class="list"><h3>Protocol OM - Transfer Real +100 J</h3>
+<input id="ofer" placeholder="Ofer azi"><input id="nevoie" placeholder="Am nevoie">
+<button onclick="addT()">+ Adauga +100 J</button><div id="transfers"></div></div>
+<div class="list"><h3>Roi Permanent 15 - max 15 treceri</h3>
+<input id="problema" placeholder="Problema" style="width:70%"><button onclick="runRoi()">Ruleaza Roiul</button><pre id="roilog">Arhivarul, Decuplatorul, Fluxorul, Asumatorul, Traducatorul, Vazatorul, Conectorul, Simplificatorul, Testerul, Deployerul, Termuxerul, Documentarul, Eticianul, Evolutorul, Gardianul</pre></div>
+<script>
+let items=JSON.parse(localStorage.getItem('hydra')||'[]'); let J=parseInt(localStorage.getItem('J')||'10380');
+document.getElementById('jv').innerText=J;
+function render(){document.getElementById('transfers').innerHTML=items.map(t=>'<div>✓ '+t.ofer+' → '+t.nevoie+'</div>').join('')}
+function addT(){let o=ofer.value,n=nevoie.value; if(!o||!n)return; items.push({ofer:o,nevoie:n}); localStorage.setItem('hydra',JSON.stringify(items)); J+=100; jv.innerText=J; jinput.value=J; localStorage.setItem('J',J); render(); ofer.value=''; nevoie.value='';}
+function runRoi(){const AG=['Arhivarul','Decuplatorul','Fluxorul','Asumatorul','Traducatorul','Vazatorul','Conectorul','Simplificatorul','Testerul','Deployerul','Termuxerul','Documentarul','Eticianul','Evolutorul','Gardianul']; let p=problema.value||'Deploy verde'; let log=[]; for(let i=0;i<AG.length;i++){let d=AG[i]=='Fluxorul'||AG[i]=='Conectorul'?120:50; if(AG[i]=='Gardianul'&&J<300){log.push((i+1)+'. Gardianul STOP');break;} J+=d; log.push((i+1)+'. '+AG[i]+': J+'+d+' => '+J); if(J>700&&i>=6){log.push('AUTONOMIE la '+(i+1));break;} if(i>=14)break;} jv.innerText=J; jinput.value=J; localStorage.setItem('J',J); roilog.innerText=log.join('\n');}
+render();
+</script></body></html>
