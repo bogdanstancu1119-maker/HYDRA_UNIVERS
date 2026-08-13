@@ -1,0 +1,37 @@
+name: Find duplicates and open PR
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  find-duplicates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Run duplicate finder
+        run: |
+          python3 .github/scripts/find_and_move_duplicates.py
+
+      - name: Create pull request with changes (if any)
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: move duplicate files to duplicates-for-review (automated)'
+          title: 'Move duplicate files to duplicates-for-review (automated)'
+          body: |
+            This PR was created automatically by the duplicate-finder workflow.
+            Files identified as duplicates were moved to the folder `duplicates-for-review` for manual review.
+          base: main
+          branch: duplicate-fix-${{ github.run_id }}
+          labels: automated,duplicate
