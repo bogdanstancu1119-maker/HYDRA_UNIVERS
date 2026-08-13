@@ -1,0 +1,62 @@
+  - name: Run PSIE maintenance (audit & optional cleanup)
+    uses: actions/github-script@v6
+    with:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      script: |
+        const fs = require('fs');
+        const core = require('@actions/core');
+        const dryRunInput = core.getInput('dry_run') || process.env.DRY_RUN || 'true';
+        const keepInput = core.getInput('keep') || process.env.KEEP || '4';
+        const dryRun = (String(dryRunInput) === 'true');
+        const keep = parseInt(keepInput, 10) || 4;
+        const owner = context.repo.owner;
+        const repo = context.repo.repo;
+        core.info(`PSIE maintenance starting for ${owner}/${repo}. dryRun=${dryRun}, keep=${keep}`);
+
+        async function listAllWorkflows() {
+          const res = await github.paginate(github.actions.listRepoWorkflows, { owner, repo, per_page: 100 });
+          return res;
+        }
+
+        async function listAllRunsForWorkflow(workflow_id) {
+          const res = await github.paginate(github.actions.listWorkflowRuns, { owner, repo, workflow_id, per_page: 100 });
+          return res;
+        }
+
+        const workflows = await listAllWorkflows();
+        const report = [];
+
+        for (const wf of workflows) {
+          core.info(`Processing workflow: ${wf.name} (id=${wf.id})`);
+          const allRuns = await listAllRunsForWorkflow(wf.id);
+          const failedRuns = allRuns.filter(r => r.conclusion === 'failure' || r.conclusion === 'cancelled' || r.conclusion === 'timed_out');
+          failedRuns.sort((a,b)=> new Date(b.created_at) - new Date(a.created_at));
+          const toDelete = failedRuns.slice(keep);
+          report.push({ workflow: wf.name, workflow_id: wf.id, total_runs: allRuns.length, failed_runs: failedRuns.length, to_delete: toDelete.map(r=>({id: r.id, url: r.html_url, created_at: r.created_at})) });
+
+          if (!dryRun && toDelete.length > 0) {
+            for (const r of toDelete) {
+              try {
+                core.info(`Deleting run ${r.id} (${r.html_url})`);
+                await github.actions.deleteWorkflowRun({ owner, repo, run_id: r.id });
+              } catch (err) {
+                core.warning(`Failed deleting run ${r.id}: ${err.message}`);
+              }
+            }
+          }
+        }
+
+        const outPath = 'psie_maintenance_report.json';
+        fs.writeFileSync(outPath, JSON.stringify(report, null, 2));
+        core.setOutput('report_path', outPath);
+        console.log('PSIE maintenance report written to', outPath);
+
+  - name: Upload PSIE maintenance report
+    uses: actions/upload-artifact@v4
+    with:
+      name: psie-maintenance-report
+      path: psie_maintenance_report.json
+
+  - name: Display summary
+    run: |
+      echo "PSIE maintenance completed (dry_run=${{ inputs.dry_run }}, keep=${{ inputs.keep }})"
