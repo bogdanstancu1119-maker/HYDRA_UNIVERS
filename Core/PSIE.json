@@ -1,0 +1,1 @@
+export function calc(t,d,a){let J=t*100+d*10;let SDI=Math.max(0,Math.min(1,d/(t+1||1)));let A=Math.max(0,Math.min(1,a));return{J,SDI,A,dSdt:J*(1-A*SDI),status:J<300?'colaps':J<700?'tranzitie':'autonom'}}
