@@ -1,0 +1,1 @@
+export const AGENTS=['Arhivarul','Decuplatorul','Fluxorul','Asumatorul','Traducatorul','Vazatorul','Conectorul','Simplificatorul','Testerul','Deployerul','Termuxerul','Documentarul','Eticianul','Evolutorul','Gardianul']
