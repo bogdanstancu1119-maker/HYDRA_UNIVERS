@@ -55,3 +55,4 @@ jobs:
             
             # Copie workflow-urile verzi
             cp /tmp/clean-workflows/*.yml .github
+            
