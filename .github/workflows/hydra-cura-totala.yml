@@ -20,7 +20,7 @@ jobs:
           ls /tmp/clean/ || true
 
           # Lista ta - dar fara ghilimele problematice
-          for REPO in psie-arca PSIE_Mirror Pragul-; do
+           for REPO in HYDRA_UNIVERS hydra-core Hidra_core.deployed.py psie-arca Arca.py Oglinzi-PSIE PSIE-Lab psie_engine.py PSIE-Symbiote Matricea-HTML- Pragul- PSIE_Mirror Oglinzi-; do
             echo "=== Incerc $REPO ==="
             rm -rf /tmp/work
             git clone https://oauth2:${PAT}@github.com/bogdanstancu1119-maker/${REPO}.git /tmp/work || { echo "Clone esuat $REPO - continui"; continue; }
