@@ -1,0 +1,50 @@
+name: hydra-bursa-vie
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # la fiecare 30 min
+  workflow_dispatch:
+    inputs:
+      capital:
+        description: 'Capital samanta vie'
+        default: '10'
+        required: false
+      simbol:
+        description: 'Simbol'
+        default: 'BTC'
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  bursa-psie:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Ruleaza Bursa PSIE
+        run: |
+          cat Bursa_PSIE.py
+          python Bursa_PSIE.py --loop 1 --capital ${{ inputs.capital || 10 }} --simbol ${{ inputs.simbol || 'BTC' }}
+          echo "---"
+          cat bursa_v_mem.json || echo "mem nou"
+      
+      - name: Ruleaza Compta PSIE
+        run: |
+          python Contabilitate_PSIE.py --loop 1 --subiect "profit hartie 0 cash" || true
+          cat contabilitate_mem.json || true
+      
+      - name: Commit memorie vie
+        run: |
+          git config user.name "hydra-bot"
+          git config user.email "hydra@psie.vie"
+          git add -A
+          git diff --staged --quiet || git commit -m "hydra: J flux + praguri $(date -u) | Cap 10€ -> V_real | 80% user 20% Hydra"
+          git push || echo "nimic de push"
