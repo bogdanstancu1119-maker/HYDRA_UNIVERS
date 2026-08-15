@@ -1,0 +1,34 @@
+name: hydra-bursa-vie
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    inputs:
+      capital: { description: 'Capital samanta vie', default: '10', required: false }
+      simbol: { description: 'Simbol', default: 'BTCUSDT', required: false }
+permissions:
+  contents: write
+jobs:
+  bursa-psie:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: bursa-psie
+        run: |
+          echo "HYDRA VIE v3.2 - samanta 10€ - cutii postale + judo - 80/20"
+          if [! -f bursa_v_mem.json ]; then echo '{"bucle":0,"J_total":0,"SDI":5.0,"capital_viu":10.0,"total_retras":0,"total_user":0,"total_hydra":0,"praguri_atinse":0,"capital_max":0}' > bursa_v_mem.json; fi
+          CAP="${{ inputs.capital }}"; [ -z "$CAP" ] && CAP="10"
+          SIM="${{ inputs.simbol }}"; [ -z "$SIM" ] && SIM="BTCUSDT"
+          python3 hydra_final_v31.py --loop 5 --capital $CAP --simbol $SIM --paper || true
+          cat bursa_v_mem.json | tail -n 20
+      - name: commit
+        if: always()
+        run: |
+          git config user.name "hydra-bot"
+          git config user.email "hydra@psie.vie"
+          git add -A
+          git commit -m "hydra v3.2 vie 10€ - cutii + judo 80/20 verde" || true
+          git push || true
