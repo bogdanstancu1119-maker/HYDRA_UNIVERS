@@ -1,0 +1,13 @@
+/hydra-fabrica-fractala/
+├── README.md
+├── package.json
+├── src/
+│ ├── hydraFabricaUnelte.js <- 1 unealtă = 500 planuri
+│ ├── hydraSuprapunere100.js <- 100 tipare → 1 hartă
+│ ├── bibliotecaExterna.js <- adapter Supabase / R2 / Base44
+│ └── utils/
+│ ├── embeddings.js
+│ └── cacheFractal.js
+└── base44/
+    ├── hydraFabricaUnelte.json <- import direct în Base44 Tools
+    └── hydraSuprapunere100.json <- import direct în Base44 Workflows
