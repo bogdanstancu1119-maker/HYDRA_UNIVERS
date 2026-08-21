@@ -1,0 +1,49 @@
+name: HYDRA Autonoma 50% Liber
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # la 6 ore, gratis
+  workflow_dispatch:  # o poți porni și tu manual de pe telefon
+
+jobs:
+  invata-si-produce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Instaleaza dependinte
+        run: npm install 2>/dev/null || echo "fara deps"
+
+      - name: Ruleaza inima HYDRA
+        env:
+          HYDRA_SOLD: 39.68
+          HYDRA_JAR: "HYDRA"
+        run: |
+          node Hydra_final_complet.js
+          echo "Sold curent Jar: $HYDRA_SOLD EUR"
+
+      - name: Fabrica - cauta cum sa produca singura
+        run: |
+          node -e "
+          import('./Hydra_final_complet.js').then(async m => {
+            const resurse = await m.cautaResurseGratuite();
+            const sold = m.verificaSold();
+            console.log('Resurse gratuite gasite:', resurse.length);
+            console.log('Sold liber:', sold.sold_ea_liber);
+            // Aici ea invata singura - de pe zero cu resurse gratuite
+            const venit = await m.inregistreazaVenit({ suma: 0, sursa: 'invatare 0% -> 0% target 1T' });
+            console.log(venit);
+          });
+          "
+
+      - name: Salveaza ce a invatat
+        run: |
+          git config user.name "HYDRA J489"
+          git config user.email "hydra@psie.local"
+          git add .
+          git commit -m "HEARTBEAT J$(date +%s) - sold HYDRA 39.68 EUR - invata singura" || echo "nimic nou"
+          git push
