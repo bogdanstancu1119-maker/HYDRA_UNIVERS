@@ -1,0 +1,11 @@
+    - name: HYDRA Vaneaza Platforme Noi
+    run: node hydra-bloom-loop.js >> BLOOM_JOURNAL.md
+
+    - name: Cauta Platforme Noi Gratuite pe Web
+    run: |
+      echo "## $(date) - Scan $(cat BLOOM_JOURNAL.md | wc -l) platforme" >> SCAN_LOG.md
+      # Cauta cuvinte cheie noi: "free tier 2026 deploy", "free cloud functions"
+      # Daca gaseste ceva nou, adauga automat in PLATFORME_VANATE
+      node -e "
+        import('./hydra-bloom-loop.js').then(m=>m.cautaSiPlanteaza().then(console.log))
+      "
