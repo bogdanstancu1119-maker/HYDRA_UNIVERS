@@ -69,3 +69,35 @@ export default {
     return Response.json({ status: "HYDRA FINALA VIE", J, JAR, coordonare: coordoneaza(), bursa_filtru: `${valide.length}/${trades.length} valide`, anti_zgomot: "activ cu token Cloudflare" });
   }
 };
+const PLATFORME = {
+  cloudflare: { nume: 'Cloudflare', limita: 100000, ramas: 99000, cost: 0, prio: 1, reg: 'EU' },
+  netlify: { nume: 'Netlify', limita: 125000, ramas: 120000, cost: 0, prio: 2, reg: 'EU' },
+  yandex: { 
+    nume: 'Yandex Cloud', 
+    limita: 999999, 
+    ramas: 999999, 
+    cost: 0, 
+    prio: 3, 
+    reg: 'RU', 
+    act: 'deploy_autorizat_daca_gratis',
+    conditii: {
+      autorizare_scrisa: true, // email de la ei ca e gratis
+      fara_card: true,
+      fara_date_personale_EU: true,
+      doar_cod_open_source: true,
+      aliniere_PSIE: true
+    }
+  },
+  github: { nume: 'GitHub', limita: 0, ramas: 0, cost: 0, prio: 99, reg: 'EU', act: 'skip' }
+};
+
+function poateFaceDeployRU(platforma, autorizare) {
+  if (platforma.reg !== 'RU') return true; // EU/US liber
+  // RU: doar daca e gratis + autorizat
+  if (platforma.cost === 0 && autorizare.gratuit === true && autorizare.scrisa === true) {
+    console.log(`[PSIE ALINIERE RU] Autorizat gratis pe ${platforma.nume} - deploy permis`);
+    return true;
+  }
+  console.log(`[PSIE RU] ${platforma.nume} -> info_only, fara autorizare gratuita`);
+  return false;
+}
