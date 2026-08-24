@@ -1,0 +1,44 @@
+name: Hydra Orchestrator
+
+on:
+  push:
+    paths-ignore:
+      - 'state/**'
+      - 'logs/**'
+      - '**.md'
+  schedule:
+    - cron: '*/30 * * * *' # la 30 min, nu la 5
+  workflow_dispatch:
+
+concurrency:
+  group: hydra-orchestration
+  cancel-in-progress: true
+
+jobs:
+  orchestrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Hydra Batch
+        id: hydra
+        continue-on-error: true # SOFT FAIL - nu mai trimite mail
+        run: |
+          npm ci --omit=dev || npm i
+          node orchestrator.js || echo "::warning::Hydra soft fail, saved to state"
+
+      - name: Save state without triggering loop
+        if: always()
+        run: |
+          git config user.name "hydra-bot"
+          git config user.email "hydra@bot"
+          git add state/ logs/ || true
+          git diff --staged --quiet || git commit -m "hydra: auto-update state [skip ci]"
+          git push || true
