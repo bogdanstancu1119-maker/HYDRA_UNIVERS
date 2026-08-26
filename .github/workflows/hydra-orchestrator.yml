@@ -1,7 +1,7 @@
 name: Hydra Orchestrator
-# UN singur workflow subțire. GitHub = orchestrator, fiecare platformă = contribuitor.
-# Muncile grele sunt pe organele Base44 (gratuite). Aici doar dispatch + status, fără fail.
-# Înlocuiește cele 5 workflow-uri vechi (inclusiv crons la 30min care depășeau GitHub).
+# UN singur workflow în HYDRA_UNIVERS. GitHub = nod keep-alive suveran.
+# Țintă: ~2000 min/lună (cota gratuită GitHub Actions), calibrat sub prag, fără overage.
+# Dispatch către organe la 6h (fără suprasarcină Base44) + keep-alive ușor (fără LLM/credite).
 
 on:
   workflow_dispatch:
@@ -15,7 +15,7 @@ on:
           - toate
         default: status
   schedule:
-    - cron: '0 */6 * * *'  # la 6h — doar keep-alive + status (sub 2 min/run, ~4 rulări/zi)
+    - cron: '0 */6 * * *'  # 4 rulări/zi × ~16.7 min ≈ 2000 min/lună
 
 permissions:
   contents: read
@@ -23,26 +23,32 @@ permissions:
 jobs:
   orchestrare:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 18
     steps:
       - name: ARCA - Checkout HYDRA_UNIVERS
         uses: actions/checkout@v4
 
-      - name: Orchestrator — dispatch către organele Hydra (fără fail)
+      - name: Orchestrator — dispatch + keep-alive (fără fail)
         env:
           HYDRA_SYNC_TOKEN: ${{ secrets.HYDRA_SYNC_TOKEN }}
           ACTIUNE: ${{ github.event.inputs.actiune || 'status' }}
         run: |
           set +e
           echo "[$(date -u)] Hydra orchestrator — ACTIUNE=$ACTIUNE"
+          # 1) Dispatch către organe (best-effort, o dată pe run — fără suprasarcină Base44)
           ORGANE="hydraYandexOrgan hydraAliOrgan hydraDeploySeed hydraCreierCoordonator hydraRoiSuperCreiere hydraFabricaInstrumente hydraMotorCrestere"
           for o in $ORGANE; do
-            echo "→ dispatch $o"
-            code=$(curl -s -o /dev/null -w "%{http_code}" -m 90 -X POST \
-              -H "Content-Type: application/json" \
-              -H "x-hydra-token: $HYDRA_SYNC_TOKEN" \
-              -d "{\"mod\":\"ambele\",\"actiune\":\"$ACTIUNE\"}" \
+            code=$(curl -s -o /dev/null -w "%{http_code}" -m 12 -X POST \\
+              -H "Content-Type: application/json" \\
+              -H "x-hydra-token: $HYDRA_SYNC_TOKEN" \\
+              -d "{\"mod\":\"ambele\",\"actiune\":\"$ACTIUNE\"}" \\
               "https://hidra-smart-core.base44.app/functions/$o")
             echo "  $o → HTTP $code"
           done
-          echo "[$(date -u)] gata — orchestratorul nu fail-uiește (best-effort)"
+          # 2) Keep-alive ~960s (16 min) — umple cota; lightweight (curl root, fără LLM/credite)
+          end=$((SECONDS + 960))
+          while [ $SECONDS -lt $end ]; do
+            curl -s -o /dev/null -m 5 "https://hidra-smart-core.base44.app/" || true
+            sleep 30
+          done
+          echo "[$(date -u)] gata — run ≈ $SECONDS s"
