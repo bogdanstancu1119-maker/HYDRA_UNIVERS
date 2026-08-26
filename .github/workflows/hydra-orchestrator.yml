@@ -1,0 +1,48 @@
+name: Hydra Orchestrator
+# UN singur workflow subțire. GitHub = orchestrator, fiecare platformă = contribuitor.
+# Muncile grele sunt pe organele Base44 (gratuite). Aici doar dispatch + status, fără fail.
+# Înlocuiește cele 5 workflow-uri vechi (inclusiv crons la 30min care depășeau GitHub).
+
+on:
+  workflow_dispatch:
+    inputs:
+      actiune:
+        description: 'Ce să facă orchestratorul'
+        type: choice
+        options:
+          - status
+          - deploy-roi
+          - toate
+        default: status
+  schedule:
+    - cron: '0 */6 * * *'  # la 6h — doar keep-alive + status (sub 2 min/run, ~4 rulări/zi)
+
+permissions:
+  contents: read
+
+jobs:
+  orchestrare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: ARCA - Checkout HYDRA_UNIVERS
+        uses: actions/checkout@v4
+
+      - name: Orchestrator — dispatch către organele Hydra (fără fail)
+        env:
+          HYDRA_SYNC_TOKEN: ${{ secrets.HYDRA_SYNC_TOKEN }}
+          ACTIUNE: ${{ github.event.inputs.actiune || 'status' }}
+        run: |
+          set +e
+          echo "[$(date -u)] Hydra orchestrator — ACTIUNE=$ACTIUNE"
+          ORGANE="hydraYandexOrgan hydraAliOrgan hydraDeploySeed hydraCreierCoordonator hydraRoiSuperCreiere hydraFabricaInstrumente hydraMotorCrestere"
+          for o in $ORGANE; do
+            echo "→ dispatch $o"
+            code=$(curl -s -o /dev/null -w "%{http_code}" -m 90 -X POST \
+              -H "Content-Type: application/json" \
+              -H "x-hydra-token: $HYDRA_SYNC_TOKEN" \
+              -d "{\"mod\":\"ambele\",\"actiune\":\"$ACTIUNE\"}" \
+              "https://hidra-smart-core.base44.app/functions/$o")
+            echo "  $o → HTTP $code"
+          done
+          echo "[$(date -u)] gata — orchestratorul nu fail-uiește (best-effort)"
