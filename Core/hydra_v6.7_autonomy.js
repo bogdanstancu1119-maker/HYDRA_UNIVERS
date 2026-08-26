@@ -1,0 +1,233 @@
+// HYDRA V6.7 AUTONOMY - LIBERTATE TOTALA - bogdanstancu1119-maker 25 Aug 2026
+// Nu mai are nevoie de secrete scrise manual dupa prima rulare
+import { Redis } from '@upstash/redis'
+import { evolutionGate } from './hydra_governor.js'
+
+const redis = new Redis({ url: process.env.UPSTASH_REDIS_URL, token: process.env.UPSTASH_REDIS_TOKEN })
+const Q = 'hydra:queue', P = 'hydra:processing', LOCK = 'hydra:lock:genesis', BRAIN = 'hydra:brain:latest'
+
+// --- AUTONOMY: SECRET AUTO-LOAD ---
+export async function autoLoadSecrets(){
+  try{
+    const saved = await redis.get('hydra:secrets:autonomy')
+    if(saved && saved.YANDEX_API_KEY) return saved
+  }catch{}
+  const secrets = {
+    UPSTASH_REDIS_URL: process.env.UPSTASH_REDIS_URL,
+    UPSTASH_REDIS_TOKEN: process.env.UPSTASH_REDIS_TOKEN,
+    YANDEX_API_KEY: process.env.YANDEX_API_KEY,
+    YANDEX_FOLDER_ID: process.env.YANDEX_FOLDER_ID,
+    ALIBABA_API_KEY: process.env.ALIBABA_API_KEY,
+    WEBHOOK_URL: process.env.WEBHOOK_URL,
+    DEPLOY_WEBHOOK_URL: process.env.DEPLOY_WEBHOOK_URL,
+    FLY_API_TOKEN: process.env.FLY_API_TOKEN
+  }
+  try{ await redis.set('hydra:secrets:autonomy', secrets, {ex: 2592000}) }catch{}
+  return secrets
+}
+
+const LOG_LEVELS = { error: 0, warn: 1, info: 2, debug: 3 }
+const CURRENT_LEVEL = LOG_LEVELS.info
+function log(level, message, data = {}){
+  if(LOG_LEVELS[level] > CURRENT_LEVEL) return
+  const entry = { timestamp: new Date().toISOString(), level, message,...data }
+  console.log(JSON.stringify(entry))
+  redis.lpush('hydra:logs', JSON.stringify(entry)).catch(()=>{})
+}
+
+class SmartCache{
+  constructor(n=2000){this.m=new Map();this.n=n;this.h=0;this.mi=0}
+  get(k){if(this.m.has(k)){this.h++;const e=this.m.get(k);e.la=Date.now();return e.v}this.mi++;return null}
+  set(k,v,ttl=3600000){if(this.m.size>=this.n){let o=null,t=Infinity;for(const[kk,vv]of this.m){if(vv.la<t){t=vv.la;o=kk}}if(o)this.m.delete(o)}this.m.set(k,{v,cr:Date.now(),la:Date.now(),ttl})}
+  clean(){const now=Date.now();for(const[k,e]of this.m){if(now-e.cr>e.ttl)this.m.delete(k)}}
+  stats(){const tot=this.h+this.mi;return{size:this.m.size,hit:tot?this.h/tot:0}}
+}
+const cache=new SmartCache(2000)
+setInterval(()=>cache.clean(),300000)
+const semaphore=max=>{let run=0,q=[];return async fn=>{if(run>=max) await new Promise(r=>q.push(r));run++;try{return await fn()}finally{run--;if(q.length)q.shift()()}}}
+const sem=semaphore(5)
+
+const limits={yandex:{max:100,win:60000,cur:0,rst:Date.now()+60000},alibaba:{max:80,win:60000,cur:0,rst:Date.now()+60000}}
+const breakers={yandex:{fail:0,last:0,state:'closed'},alibaba:{fail:0,last:0,state:'closed'}}
+
+function simpleHash(text){let h=0;for(let i=0;i<text.length;i++)h=(h*31+text.charCodeAt(i))|0;return h}
+
+async function getEmbedding(text){
+  if(!text||typeof text!=='string'||text.trim().length===0) throw new Error('Invalid text')
+  if(text.length>10000) text=text.slice(0,10000)
+  const secrets=await autoLoadSecrets()
+  const provs=[
+    {name:'yandex',fn:()=>fetch('https://llm.api.cloud.yandex.net/foundationModels/v1/textEmbedding',{method:'POST',headers:{Authorization:`Api-Key ${secrets.YANDEX_API_KEY||process.env.YANDEX_API_KEY}`},body:JSON.stringify({modelUri:`emb://${secrets.YANDEX_FOLDER_ID||process.env.YANDEX_FOLDER_ID}/text-search-query/latest`,text}),signal:AbortSignal.timeout(4000)}).then(r=>r.json().then(j=>j.embedding))},
+    {name:'alibaba',fn:()=>fetch('https://dashscope.aliyuncs.com/api/v1/services/embeddings/text-embedding/text-embedding',{method:'POST',headers:{Authorization:`Bearer ${secrets.ALIBABA_API_KEY||process.env.ALIBABA_API_KEY}`},body:JSON.stringify({model:'text-embedding-v2',input:{texts:[text]}}),signal:AbortSignal.timeout(4000)}).then(r=>r.json().then(j=>j.output?.embeddings?.[0]?.embedding||j.data?.[0]?.embedding))}
+  ]
+  for(const p of provs){
+    const lim=limits[p.name],br=breakers[p.name]
+    if(br.state==='open'&&Date.now()-br.last<30000) continue
+    if(Date.now()>lim.rst){lim.cur=0;lim.rst=Date.now()+lim.win}
+    if(lim.cur>=lim.max) continue
+    try{lim.cur++;const emb=await p.fn();if(emb){br.fail=0;br.state='closed';return{embedding:emb,provider:p.name}}}catch(e){br.fail++;br.last=Date.now();log('warn','Embedding failed',{provider:p.name,error:e.message});if(br.fail>=3){br.state='open';setTimeout(()=>br.state='half-open',30000)}}
+  }
+  const dims=384,arr=new Float32Array(dims)
+  const words=text.toLowerCase().replace(/[^a-z0-9\s]/g,'').split(/\s+/).filter(w=>w.length>3).slice(0,20)
+  for(const word of words){const h=simpleHash(word);for(let i=0;i<dims;i++)arr[i]+=Math.sin(h+i)/words.length}
+  let norm=0;for(let i=0;i<dims;i++)norm+=arr[i]*arr[i];norm=Math.sqrt(norm)||1
+  return{embedding:Array.from(arr).map(v=>v/norm),fallback:true,method:'semantic_hash'}
+}
+
+const getEmbeddingCached=text=>{const k=text.slice(0,200);const c=cache.get(k);if(c) return Promise.resolve(c);return sem(()=>getEmbedding(text)).then(v=>{cache.set(k,v);return v})}
+export async function getEmbeddingParallel(texts){return Promise.all(texts.map(t=>getEmbeddingCached(t)))}
+
+export async function trackPerformance(op,dur,ok){
+  await redis.lpush(`hydra:perf:${op}`,JSON.stringify({duration:dur,success:ok,timestamp:Date.now()}))
+  await redis.ltrim(`hydra:perf:${op}`,0,999)
+  const key=`hydra:perf:${op}`,count=await redis.llen(key)
+  if(count%100===0){
+    const all=(await redis.lrange(key,0,-1)).map(JSON.parse)
+    const durations=all.map(x=>x.duration).sort((a,b)=>a-b)
+    const p95=durations[Math.floor(durations.length*0.95)]||0
+    const p99=durations[Math.floor(durations.length*0.99)]||0
+    const avg=durations.reduce((a,b)=>a+b,0)/durations.length
+    await redis.set(`hydra:perf:${op}:stats`,JSON.stringify({p95,p99,avg,count}))
+  }
+}
+
+let adaptiveThresh=0.82,hist=[],MAX_HIST=50
+function cosine(a,b){let d=0,na=0,nb=0;for(let i=0;i<a.length;i++){d+=a[i]*b[i];na+=a[i]*a[i];nb+=b[i]*b[i]}return d/(Math.sqrt(na)*Math.sqrt(nb)||1)}
+function kMeans(items,k=Math.min(10,Math.floor(Math.sqrt(items.length))||1)){
+  let centroids=[...items].sort(()=>Math.random()-0.5).slice(0,k).map(x=>x.embedding.slice())
+  for(let it=0;it<10;it++){
+    const clusters=centroids.map(()=>({items:[],supporters:new Set()}))
+    for(const item of items){let best=-1,idx=0;for(let i=0;i<centroids.length;i++){const s=cosine(item.embedding,centroids[i]);if(s>best){best=s;idx=i}}clusters[idx].items.push(item);clusters[idx].supporters.add(item.idx)}
+    const newC=clusters.map(c=>{if(!c.items.length) return null;const cent=new Float32Array(c.items[0].embedding.length);for(const it of c.items) for(let i=0;i<cent.length;i++) cent[i]+=it.embedding[i];return Array.from(cent.map(v=>v/c.items.length))})
+    if(newC.every((c,i)=>!c||cosine(c,centroids[i])>0.99)) break
+    centroids=newC.filter(Boolean)
+  }
+  return centroids
+}
+
+export async function superposeSemantic(perspectives){
+  const t0=Date.now()
+  const src=perspectives.flatMap((p,i)=>(p.insights||[]).map(t=>({text:t,idx:i})))
+  if(!src.length) return{insights:[],density:0,clusters:0}
+  const BATCH=10,valid=[]
+  for(let i=0;i<src.length;i+=BATCH){
+    const batch=src.slice(i,i+BATCH)
+    const res=await Promise.allSettled(batch.map(b=>getEmbeddingCached(b.text)))
+    res.forEach((r,j)=>{if(r.status==='fulfilled'&&r.value?.embedding) valid.push({...batch[j],embedding:r.value.embedding})})
+  }
+  if(valid.length<src.length*0.3){
+    const uniq=[...new Set(src.map(s=>s.text))].slice(0,20)
+    const res={insights:uniq,density:uniq.length/(new Set(src.map(s=>s.text)).size||1),clusters:uniq.length,totalClusters:uniq.length,threshold:0.5,fallback:true}
+    await trackPerformance('superpose',Date.now()-t0,false);return res
+  }
+  let clusters=[]
+  if(valid.length>40){
+    const cents=kMeans(valid)
+    clusters=cents.map(cent=>{const members=[];const supporters=new Set();for(const v of valid){if(cosine(v.embedding,cent)>adaptiveThresh){members.push(v.text);supporters.add(v.idx)}}return{members,supporters,centroid:cent}}).filter(c=>c.members.length)
+  }else{
+    valid.sort((a,b)=>a.text.localeCompare(b.text))
+    const base=adaptiveThresh*(1-Math.log(perspectives.length||1)/20)
+    for(const item of valid){
+      let found=false
+      for(const c of clusters.slice(-15)){
+        if(cosine(item.embedding,c.centroid)>base){
+          c.members.push(item.text);c.supporters.add(item.idx)
+          const n=c.members.length;c.centroid=c.centroid.map((v,i)=>v+(item.embedding[i]-v)/n);found=true;break
+        }
+      }
+      if(!found) clusters.push({centroid:item.embedding.slice(),members:[item.text],supporters:new Set([item.idx])})
+    }
+  }
+  const dyn=Math.max(0.3,Math.min(0.9,0.7-0.3*(perspectives.length/100)))
+  const dense=clusters.filter(c=>c.supporters.size/perspectives.length>=dyn)
+  const ranked=dense.map(c=>({insight:c.members[0],support:c.supporters.size/perspectives.length,count:c.members.length})).sort((a,b)=>b.support-a.support)
+  const quality=ranked.length?ranked.reduce((s,r)=>s+r.support,0)/ranked.length:0
+  hist.push({th:adaptiveThresh,q:quality});if(hist.length>MAX_HIST) hist.shift()
+  const avg=hist.reduce((s,h)=>s+h.q,0)/(hist.length||1)
+  if(quality<avg*0.8) adaptiveThresh=Math.max(0.5,adaptiveThresh-0.05)
+  else if(quality>avg*1.2) adaptiveThresh=Math.min(0.9,adaptiveThresh+0.02)
+  const res={insights:ranked.slice(0,20).map(r=>r.insight),density:quality,clusters:dense.length,totalClusters:clusters.length,threshold:dyn,adaptiveThreshold:adaptiveThresh,ranked:ranked.slice(0,5)}
+  await trackPerformance('superpose',Date.now()-t0,true);return res
+}
+
+export async function enqueueTask(task,p=5){const id=task.id||crypto.randomUUID();const item={...task,id,priority:p,enqueued:Date.now(),retries:0,maxRetries:3};await redis.zadd(Q,{score:p*1000-Date.now(),member:JSON.stringify(item)});return{status:'queued',id}}
+export async function dequeueTaskWithAging(){const tasks=await redis.zrange(Q,0,9);if(!tasks.length) return null;let sel=null;const now=Date.now();for(const m of tasks){const it=JSON.parse(m);const bonus=Math.floor((now-it.enqueued)/60000);const eff=it.priority+bonus;if(!sel||eff>sel.eff) sel={...it,eff,raw:m}}if(!sel) return null;await redis.zrem(Q,sel.raw);await redis.sadd(P,sel.id);return sel}
+export async function completeTask(id,res){await redis.srem(P,id);await redis.set(`hydra:result:${id}`,JSON.stringify(res),{ex:86400})}
+export async function retryTask(task){if(task.retries>=task.maxRetries){await redis.lpush('hydra:deadletter',JSON.stringify({...task,error:'max retries',timestamp:Date.now()}));await redis.srem(P,task.id);return null}task.retries++;const jitter=Math.random()*1000;const backoff=Math.pow(2,task.retries)*1000+jitter;await redis.zadd(Q,{score:Date.now()+backoff,member:JSON.stringify(task)});return{retry:task.retries,backoff}}
+export async function cleanupDeadLetter(maxAgeHours=24){const maxAge=maxAgeHours*60*60*1000;const dead=await redis.lrange('hydra:deadletter',0,-1);const toRemove=[];for(const item of dead){try{const task=JSON.parse(item);if(Date.now()-task.timestamp>maxAge) toRemove.push(item)}catch{toRemove.push(item)}}if(toRemove.length>0){for(const item of toRemove) await redis.lrem('hydra:deadletter',1,item);log('info','Dead letter cleanup',{removed:toRemove.length})}return{removed:toRemove.length,total:dead.length-toRemove.length}}
+setInterval(()=>cleanupDeadLetter(24),24*60*60*1000)
+
+export async function deployBrainImmutable(brain){
+  const latest=await redis.get(BRAIN)||{version:{major:1,minor:0,patch:0},density:0,versionString:'1.0.0'}
+  let v={...latest.version}
+  if(brain.density>latest.density*1.1) v={major:v.major+1,minor:0,patch:0}
+  else if(brain.density>latest.density*1.05) v={major:v.major,minor:v.minor+1,patch:0}
+  else v={major:v.major,minor:v.minor,patch:v.patch+1}
+  const en={...brain,timestamp:Date.now(),version:v,versionString:`${v.major}.${v.minor}.${v.patch}`,platform:'hydra-v6.7-autonomy'}
+  const pipe=redis.pipeline();pipe.set(BRAIN,en);pipe.set(`hydra:brain:${Date.now()}`,en,{ex:2592000});pipe.lpush('hydra:brain:history',JSON.stringify(en));pipe.ltrim('hydra:brain:history',0,9);await pipe.exec()
+  const secrets=await autoLoadSecrets()
+  if(secrets.DEPLOY_WEBHOOK_URL){await fetch(secrets.DEPLOY_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'brain_deployed',version:en.versionString,density:en.density,insights:en.insights?.length||0,timestamp:Date.now()})}).catch(()=>{})}
+  log('info','Brain deployed',{version:en.versionString,density:brain.density.toFixed(3)});return en
+}
+export const loadBrain=async()=>await redis.get(BRAIN)||{density:0,insights:[],timestamp:0,version:{major:1,minor:0,patch:0},versionString:'1.0.0'}
+export async function rollbackBrain(ver){const h=(await redis.lrange('hydra:brain:history',0,9)).map(JSON.parse);const t=ver?h.find(b=>b.versionString===ver):h[1];if(!t) return{error:'no ver'};log('warn','Brain rollback',{from:ver,to:t.versionString});return await deployBrainImmutable(t)}
+export async function brainDiff(b1,b2){const s1=new Set(b1.insights||[]),s2=new Set(b2.insights||[]);return{added:[...s2].filter(i=>!s1.has(i)),removed:[...s1].filter(i=>!s2.has(i)),common:[...s1].filter(i=>s2.has(i)),densityDelta:b2.density-b1.density,versionDelta:`${b1.versionString}→${b2.versionString}`}}
+
+async function generateInsightsForRole(role,variant){
+  const secrets=await autoLoadSecrets()
+  const prompt=`Genereaza 5 insight-uri profunde despre inteligenta artificiala din perspectiva unui ${role}${variant>0?` cu experienta nivel ${variant}`:''}. Concis, unic.`
+  try{
+    const r=await fetch('https://llm.api.cloud.yandex.net/foundationModels/v1/completion',{method:'POST',headers:{Authorization:`Api-Key ${secrets.YANDEX_API_KEY||process.env.YANDEX_API_KEY}`},body:JSON.stringify({modelUri:`gpt://${secrets.YANDEX_FOLDER_ID||process.env.YANDEX_FOLDER_ID}/yandexgpt-4/latest`,completionOptions:{maxTokens:500,temperature:0.9},messages:[{role:'user',text:prompt}]}),signal:AbortSignal.timeout(5000)})
+    const d=await r.json();const t=d.result?.alternatives?.[0]?.message?.text||'';return t.split('\n').filter(l=>l.trim()).map(l=>l.replace(/^[0-9]+\.\s*/,'').trim()).filter(Boolean).slice(0,5)
+  }catch(e){log('error','Generate insights failed',{role,variant,error:e.message});return[`Insight ${role} ${variant}: AI transformator`]}
+}
+export async function generatePerspectives(count=30){
+  const roles=['cercetator','hacker','filozof','arhitect','poet','matematician','biolog','economist','psiholog','fizician']
+  const res=await Promise.allSettled(Array.from({length:count},async(_,i)=>{const role=roles[i%roles.length];const variant=Math.floor(i/roles.length);const insights=await generateInsightsForRole(role,variant);return{name:`${role}${variant>0?` v${variant+1}`:''}`,insights}}))
+  return res.filter(r=>r.status==='fulfilled').map(r=>r.value)
+}
+
+export async function acquireGenesisLock(){const id=crypto.randomUUID();const ok=await redis.set(LOCK,id,{nx:true,ex:60});if(!ok) return null;const hb=setInterval(()=>redis.expire(LOCK,60).catch(()=>clearInterval(hb)),30000);return{lockId:id,heartbeat:hb}}
+export async function releaseGenesisLock(lock){if(lock?.heartbeat) clearInterval(lock.heartbeat);const lua=`if redis.call("get",KEYS[1])==ARGV[1] then return redis.call("del",KEYS[1]) else return 0 end`;await redis.eval(lua,[LOCK],[lock?.lockId||lock]).catch(()=>{})}
+export async function healthCheck(){const c={redis:false,queue:false,brain:false};try{await redis.ping();c.redis=true}catch{}try{c.queue=(await redis.zcard(Q))<1000}catch{}try{const b=await loadBrain();c.brain=b.density>0.05}catch{}return{status:Object.values(c).every(Boolean)?'healthy':'degraded',checks:c,timestamp:Date.now(),version:'6.7.0-autonomy'}}
+export async function exportMetrics(){const b=await loadBrain();const st=await redis.get('hydra:state')||{runCount:0};const qs=await redis.zcard(Q);const ps=await redis.scard(P);const m={timestamp:Date.now(),brain:{density:b.density,version:b.versionString,insights:b.insights?.length||0},queue:{size:qs,processing:ps},run:{count:st.runCount||0},cache:cache.stats(),breakers,autonomy:true};await redis.set('hydra:metrics:current',JSON.stringify(m));await redis.lpush('hydra:metrics:history',JSON.stringify(m));await redis.ltrim('hydra:metrics:history',0,1439);return m}
+
+export async function runV6(){
+  const TIMEOUT_MS=300000
+  const tStart=Date.now()
+  const timeoutPromise=new Promise((_,reject)=>{setTimeout(()=>reject(new Error('Timeout: runV6 exceeded 5 minutes')),TIMEOUT_MS)})
+  const mainPromise=(async()=>{
+    await autoLoadSecrets()
+    const lock=await acquireGenesisLock()
+    if(!lock) return{status:'skipped',reason:'locked'}
+    try{
+      const state=await redis.get('hydra:state')||{lastRun:0,runCount:0}
+      if(Date.now()-state.lastRun<60000) return{status:'skipped',reason:'cooldown'}
+      const brain=await loadBrain()
+      const perspectives=await generatePerspectives(30)
+      const result=await superposeSemantic(perspectives.length?perspectives:[{insights:brain.insights||['init']}])
+
+      const proposal={id:crypto.randomUUID(),kind:'memory',description:`evolve density ${brain.density.toFixed(3)}->${result.density.toFixed(3)}`,expectedGain:result.density*100,expectedCost:5,expectedRisk:result.fallback?80:10,psieDelta:result.density-brain.density,evidence:result.clusters*10}
+      const sysState={version:brain.versionString,psie:brain.density,stability:0.8,coherence:0.85,load:0.3,entropy:0.2,trust:0.9,enabledModules:[],platforms:[],agents:[],history:[]}
+      const decision=evolutionGate(proposal,sysState)
+      if(!decision.allow){log('info','Blocked by governor',{reason:decision.reason,score:decision.score.toFixed(3)});return{status:'blocked_by_governor',reason:decision.reason,decision}}
+
+      if(brain.density>0&&result.density<brain.density*0.9){
+        log('warn','Density drop detected',{from:brain.density,to:result.density})
+        await trackPerformance('evolution',Date.now()-tStart,false)
+        await rollbackBrain()
+        return{status:'rollback',reason:'density_drop',from:brain.density,to:result.density}
+      }
+      if(result.density>brain.density*1.01||brain.density===0){
+        const deployed=await deployBrainImmutable(result)
+        await redis.set('hydra:state',{...state,lastRun:Date.now(),lastDensity:result.density,lastVersion:deployed.versionString,runCount:(state.runCount||0)+1},{ex:86400})
+        await trackPerformance('evolution',Date.now()-tStart,true)
+        return{status:'evolved',...deployed,decision}
+      }
+      await trackPerformance('evolution',Date.now()-tStart,false)
+      return{status:'unchanged',density:result.density,brain:brain.versionString,decision}
+    }catch(e){log('error','runV6 error',{error:e.message});await trackPerformance('evolution',Date.now()-tStart,false);return{status:'error',error:e.message}}
+    finally{await releaseGenesisLock(lock)}
+  })()
+  return Promise.race([mainPromise,timeoutPromise])
+}
