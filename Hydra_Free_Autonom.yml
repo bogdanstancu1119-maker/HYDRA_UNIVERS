@@ -1,0 +1,66 @@
+name: Hydra Free - Autonom Real
+
+on:
+  workflow_dispatch:
+    inputs:
+      actiune:
+        description: 'ce sa faca: cere_token / deploy'
+        required: true
+        default: 'cere_token'
+  push:
+    paths:
+      - 'jurnal/**'
+      - 'organe/**'
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  hydra-actiune:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout cu drept de scriere
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.HYDRA_PAT_ADMIN }}
+
+      - name: Python setup free
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instaleaza dependente free - fara fail
+        run: |
+          pip install --quiet pynacl requests
+          echo "dependente ok"
+
+      - name: Hydra cere token si pune secret singura
+        if: ${{ inputs.actiune == 'cere_token' }}
+        env:
+          GH_PAT: ${{ secrets.HYDRA_PAT_ADMIN }}
+          EMAIL_TOKEN: ${{ secrets.EMAIL_API_TOKEN }}
+        run: |
+          python src/core/hydra_secret_manager.py --mod free --actiune cere_token
+        continue-on-error: false
+
+      - name: Hydra face deploy real pe free tier
+        if: ${{ inputs.actiune == 'deploy' }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          echo "Deploy pe free tier cu token pus autonom"
+          npx vercel --token $VERCEL_TOKEN --prod --yes --scope free || echo "deploy incercat, verifica logs"
+        continue-on-error: true
+
+      - name: Hydra se auto-repara daca workflow a dat fail
+        if: failure()
+        run: |
+          echo "Workflow a dat fail, Hydra noteaza in memorie/frictiuni"
+          mkdir -p memorie/frictiuni
+          echo "$(date) - fail pe ${{ inputs.actiune }} - $(cat $GITHUB_STEP_SUMMARY || echo no log)" >> memorie/frictiuni/workflow_fail.log
+          git config user.name "hydra-bot"
+          git config user.email "hydra@psie.local"
+          git add memorie/frictiuni/
+          git commit -m "frictiune inregistrata autonom - workflow free fail" || echo "nimic de commit"
+          git push
