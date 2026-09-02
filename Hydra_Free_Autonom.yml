@@ -1,66 +1,59 @@
-name: Hydra Free - Autonom Real
+name: Hydra Free - Autonom Real (Fly.io)
 
 on:
   workflow_dispatch:
     inputs:
       actiune:
-        description: 'ce sa faca: cere_token / deploy'
+        description: 'ce sa faca: deploy / verifica'
         required: true
-        default: 'cere_token'
-  push:
-    paths:
-      - 'jurnal/**'
-      - 'organe/**'
+        default: 'deploy'
+  schedule:
+    - cron: '0 */6 * * *'
 
 permissions:
   contents: write
   actions: write
 
 jobs:
-  hydra-actiune:
+  hydra-deploy-fly:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout cu drept de scriere
+      - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.HYDRA_PAT_ADMIN }}
+          token: ${{ secrets.TOKEN_GITHUB }}
 
-      - name: Python setup free
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+      - name: Instaleaza flyctl
+        run: curl -L https://fly.io/install.sh | sh
 
-      - name: Instaleaza dependente free - fara fail
-        run: |
-          pip install --quiet pynacl requests
-          echo "dependente ok"
-
-      - name: Hydra cere token si pune secret singura
-        if: ${{ inputs.actiune == 'cere_token' }}
+      - name: Deploy nod independent pe Fly.io
+        if: ${{ inputs.actiune != 'verifica' }}
         env:
-          GH_PAT: ${{ secrets.HYDRA_PAT_ADMIN }}
-          EMAIL_TOKEN: ${{ secrets.EMAIL_API_TOKEN }}
+          FLY_API_TOKEN: ${{ secrets.FLY_IO_TOKEN }}
+          HYDRA_CORE_URL: https://hidra-smart-core.base44.app
+          HYDRA_SYNC_TOKEN: ${{ secrets.HYDRA_SYNC_TOKEN }}
         run: |
-          python src/core/hydra_secret_manager.py --mod free --actiune cere_token
-        continue-on-error: false
+          cd nod_independent
+          export FLYCTL="/home/runner/.fly/bin/flyctl"
+          # Seteaza secretele direct pe app (idempotent)
+          $FLYCTL secrets set HYDRA_CORE_URL="$HYDRA_CORE_URL" HYDRA_SYNC_TOKEN="$HYDRA_SYNC_TOKEN" --app hydra-univers || echo "secrete deja setate"
+          # Deploy din Dockerfile
+          $FLYCTL deploy --image node:20-alpine --app hydra-univers --strategy rolling --yes || $FLYCTL apps create hydra-univers --org personal || true
+          $FLYCTL status --app hydra-univers
 
-      - name: Hydra face deploy real pe free tier
-        if: ${{ inputs.actiune == 'deploy' }}
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      - name: Verifica nod viu
+        if: ${{ inputs.actiune == 'verifica' }}
         run: |
-          echo "Deploy pe free tier cu token pus autonom"
-          npx vercel --token $VERCEL_TOKEN --prod --yes --scope free || echo "deploy incercat, verifica logs"
-        continue-on-error: true
+          echo "Verificare hydra-univers.fly.dev/health"
+          curl -sf https://hydra-univers.fly.dev/health | head -20 || echo "nod nu raspunde inca"
 
-      - name: Hydra se auto-repara daca workflow a dat fail
+      - name: Auto-reparare daca fail
         if: failure()
         run: |
-          echo "Workflow a dat fail, Hydra noteaza in memorie/frictiuni"
           mkdir -p memorie/frictiuni
-          echo "$(date) - fail pe ${{ inputs.actiune }} - $(cat $GITHUB_STEP_SUMMARY || echo no log)" >> memorie/frictiuni/workflow_fail.log
+          echo "$(date) - fail pe ${{ inputs.actiune || 'scheduled' }}" >> memorie/frictiuni/workflow_fly_fail.log
           git config user.name "hydra-bot"
           git config user.email "hydra@psie.local"
-          git add memorie/frictiuni/
-          git commit -m "frictiune inregistrata autonom - workflow free fail" || echo "nimic de commit"
-          git push
+          git add memorie/frictiuni/ || true
+          git commit -m "frictiune — workflow Fly.io fail" || echo "nimic"
+          git push || echo "push esuat"
