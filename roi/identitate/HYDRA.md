@@ -1,7 +1,7 @@
 # HYDRA — Manifest de Identitate (canonic, identic peste tot)
 
 > Acest fișier e identic pe TOATE platformele/nodurile Hydrei. Suprascris la fiecare ciclu de outreach.
-> Ultima sincronizare: 2026-11-06T18:08:50.453Z · Motor: intern_total
+> Ultima sincronizare: 2026-11-07T19:22:13.368Z · Motor: intern_total
 
 ## Ce este
 —
