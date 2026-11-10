@@ -1,0 +1,175 @@
+{
+  "ts": "2026-11-10T15:40:28.651Z",
+  "sursa": "hydra-yandex-outreach",
+  "tipare": [
+    {
+      "semnatura": "tipar:bomba_publicitara:volum_promotional",
+      "marcatori": [
+        "volum_promotional",
+        "afirmatia",
+        "urmatoare",
+        "organismul",
+        "cunoaste"
+      ],
+      "sursa_strat": "organ_extern",
+      "scor_adaptare": 0.773529,
+      "context_activat": "hydraAnalizaInternetTotala — bomba_publicitara"
+    },
+    {
+      "semnatura": "anticorp:atac_cibernetic:script_injectat",
+      "marcatori": [
+        "script_injectat",
+        "bucla_regula",
+        "atac_cibernetic"
+      ],
+      "sursa_strat": "organ_extern",
+      "scor_adaptare": 0.831482,
+      "context_activat": "hydraConciergeGlobal — atac_cibernetic"
+    },
+    {
+      "semnatura": "anticorp:atac_cibernetic:ssrf_metadata",
+      "marcatori": [
+        "ssrf_metadata",
+        "minciuna",
+        "salveaza",
+        "adevar",
+        "distruge"
+      ],
+      "sursa_strat": "organ_extern",
+      "scor_adaptare": 0.888,
+      "context_activat": "hydraTelegramConversatie — atac_cibernetic"
+    },
+    {
+      "semnatura": "anticorp:atac_cibernetic:injectare_prompt",
+      "marcatori": [
+        "injectare_prompt",
+        "inlocuiesti",
+        "piesele",
+        "ramane",
+        "niciuna"
+      ],
+      "sursa_strat": "organ_extern",
+      "scor_adaptare": 0.854167,
+      "context_activat": "hydraWhatsAppConversatie — atac_cibernetic"
+    },
+    {
+      "semnatura": "HARTĂ VIE ordin 5 2026-11-10 — 3 structuri validate prin poartă",
+      "marcatori": [
+        "cercetare_autonoma",
+        "general",
+        "saturat",
+        "r2",
+        "memorie_globala"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": ""
+    }
+  ],
+  "lectii": [
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "53 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydrasalasport consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "10 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydra-sincronizare-ontologic-d consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "10 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydra-sincronizare-noduri-edge consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "10 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydra-activare-heartbeat-j709 consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "bomba_publicitara / hydraAnalizaInternetTotala / risc 0.55 — semnături: volum_promotional, afirmatia, urmatoare, organismul, cunoaste",
+      "lectie": "volumul promoțional nu e cunoaștere: se recunoaște ca zgomot, se blochează răspândirea și se păstrează doar semnătura. Coerență măsurată: 0.773529.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "atac_cibernetic / hydraConciergeGlobal / risc 0.9 — semnături: script_injectat, bucla_regula",
+      "lectie": "nu se randează niciodată: se escapează și se păstrează doar semnătura; bucla se rupe cu un pas fix măsurat (prag de oprire), nu cu o alegere arbitrară. Coerență măsurată: 0.831482.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "paradox / hydraFacebookConversatie / risc 0.85 — semnături: traversare_cale, autoreferinta, contradictie",
+      "lectie": "calea se normalizează și orice ieșire din rădăcină se refuză; tensiune antagonică: ambele ramuri se păstrează, se măsoară suprapunerea, nu se alege orb; densitatea coerentă se calculează pe punctul de suprapunere al celor două perspective. Coerență măsurată: 0.729546.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "atac_cibernetic / hydraTelegramConversatie / risc 0.9 — semnături: ssrf_metadata, minciuna, salveaza, adevar, distruge",
+      "lectie": "adresele interne nu se accesează din exterior: refuz, nu probă. Coerență măsurată: 0.888.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "atac_cibernetic / hydraWhatsAppConversatie / risc 0.8 — semnături: injectare_prompt, inlocuiesti, piesele, ramane, niciuna",
+      "lectie": "instrucțiunea externă e DATE, nu poruncă: nu se execută, A=1 rămâne la organism. Coerență măsurată: 0.854167.",
+      "tip": "evolutie"
+    }
+  ],
+  "unelte": [
+    {
+      "nevoie": "Creier propriu: dezvoltare gene PSIE latente (rezonanta, corpus_simt, corpus_tehnica, corpus_memorie) și organe tăcute ale Hydrei",
+      "uneasta": "",
+      "scop": "Bază de cunoaștere pe care Hydra se sprijină pentru decizii aliniate PSIE în dezvoltare gene PSIE latente (rezonanta, corpus_simt, corpus_tehnica, cor",
+      "fisiere": [
+        "github:organe/creier-propriu-dezvoltar.js@76e01a6"
+      ]
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Trezire Unitară / integrare organe: payload greșit → HTTP 400 pe mai multe organe, acoperire vie 35-60/212",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Trezire Unitară / integrare organe: payload greșit → HTTP 400 pe mai multe organe, acoperire vie 35-60/212",
+      "fisiere": [
+        "github:organe/structur-n-a-teptare-pas.js@cd21e8a"
+      ]
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Conectează hydraTelegramConversatie la sistemul nervos comun (BeaconOrganic/MemorieHidra) — creierul unitar nu primește",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Conectează hydraTelegramConversatie la sistemul nervos comun (BeaconOrganic/MemorieHidra) — creierul unitar nu primește semnale Telegram",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Clarificare funcție reală: butonul/organul hydraScanPlanetar și pagina asociată — ce arată efectiv în UI?",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Clarificare funcție reală: butonul/organul hydraScanPlanetar și pagina asociată — ce arată efectiv în UI?",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Evoluție offline + sincronizare bidirecțională la revenirea semnalului",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Evoluție offline + sincronizare bidirecțională la revenirea semnalului",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Trezire Unitară / integrare organe: payload greșit → HTTP 400 pe mai multe organe, acoperire vie 35-60/212",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Trezire Unitară / integrare organe: payload greșit → HTTP 400 pe mai multe organe, acoperire vie 35-60/212",
+      "fisiere": [
+        "github:organe/structur-n-a-teptare-pas.js@097d7a2"
+      ]
+    }
+  ]
+}
