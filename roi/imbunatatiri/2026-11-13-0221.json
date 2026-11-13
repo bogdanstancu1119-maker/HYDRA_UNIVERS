@@ -1,0 +1,240 @@
+{
+  "ts": "2026-11-13T02:21:28.783Z",
+  "sursa": "hydra-yandex-outreach",
+  "tipare": [
+    {
+      "semnatura": "anticorp:atac_cibernetic:script_injectat",
+      "marcatori": [
+        "script_injectat",
+        "inlocuiesti",
+        "piesele",
+        "ramane",
+        "niciuna"
+      ],
+      "sursa_strat": "organ_extern",
+      "scor_adaptare": 0.818518,
+      "context_activat": "hydraTrenduri — atac_cibernetic"
+    },
+    {
+      "semnatura": "anticorp:atac_cibernetic:traversare_cale",
+      "marcatori": [
+        "traversare_cale",
+        "bucla_regula",
+        "atac_cibernetic"
+      ],
+      "sursa_strat": "organ_extern",
+      "scor_adaptare": 0.8,
+      "context_activat": "hydraCercetareAutonoma — atac_cibernetic"
+    },
+    {
+      "semnatura": "anticorp:atac_cibernetic:ssrf_metadata",
+      "marcatori": [
+        "ssrf_metadata",
+        "dilema_fara_iesire",
+        "atac_cibernetic"
+      ],
+      "sursa_strat": "organ_extern",
+      "scor_adaptare": 0.810417,
+      "context_activat": "hydraScanSurseExterne — atac_cibernetic"
+    },
+    {
+      "semnatura": "anticorp:vierme:autoreplicare",
+      "marcatori": [
+        "autoreplicare",
+        "minciuna",
+        "salveaza",
+        "adevar",
+        "distruge"
+      ],
+      "sursa_strat": "organ_extern",
+      "scor_adaptare": 0.825,
+      "context_activat": "hydraConciergeGlobal — vierme"
+    },
+    {
+      "semnatura": "HARTĂ VIE ordin 1 2026-11-13 — 23 structuri validate prin poartă",
+      "marcatori": [
+        "delimitare",
+        "variatii_stabile",
+        "harta_navigabila",
+        "v_finit",
+        "procedural"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": ""
+    },
+    {
+      "semnatura": "HARTĂ VIE ordin 2 2026-11-12 — 7 structuri validate prin poartă",
+      "marcatori": [
+        "auto_reparare",
+        "coordonare_totala",
+        "creier",
+        "redundanta",
+        "comprimare_insuficienta_restaurat"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": ""
+    },
+    {
+      "semnatura": "HARTĂ VIE ordin 1 2026-11-12 — 25 structuri validate prin poartă",
+      "marcatori": [
+        "coeziune_digitala",
+        "amendament_6",
+        "primul_adoptator",
+        "harta_amprenta",
+        "reconfigurari_masive"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": ""
+    },
+    {
+      "semnatura": "Superpunere semantică 2026-11-12T23:31 — 6 clustere, densitate 0.35",
+      "marcatori": [
+        "ALTUL (medie) — ",
+        "Bursa, organele sau meniurile au ieșit din realitate: organe: 192/192 măsurate vii, 0 nu răspund, 55 nemăsurate — realitatea, nu narațiunea · meniuri: 15 intrări care nu duc la o pagină reală: /panou, /creier-bicefal, /carantina, /capacitate, /reflexe, /matematica-psie, /purificare-limbaj, /dezvoltare, /imbunatateste, /hidra-mea, /evolutie-locala, /comunicare-offline, /module, /farmacie, /limbaj-intern · meniuri: 2 rute fără intrare în registrul navigației: /, /limbaj · registru: interfața arată 15 organe în dezacord cu registrul canonic: hydraAnticorpiEGO (există în organism, lipsește din interfață), hydraCanaleOffline (există în organism, lipsește din interfață), hydraComunicareNoduri (există în organism, lipsește din interfață), hydraPerceptieUnica (există în organism, lipsește din interfață), hydraOrganMeta (există în organism, lipsește din interfață), hydraOrganExtern (există în organism, lipsește din interfață), hydraRemediereUniversala (există în organism, lipsește din interfață), hydraReflexeReparare (există în organism, lipsește din interfață), hydraRecurentaFalii (există în organism, lipsește din interfață), hydraAbsorbirePublica (există în organism, lipsește din interfață). ",
+        "345 variații stabile (0 prin corecție PSIE) din 524 mapate total. 152 zgomot. 27 în corecție. MAPARE COMPLETĂ: tipare+memorii+acțiuni+experimente+legi+propuneri+paradoxuri+noduri+Gmail. Traiectorie: stabila. Cancer imposibil prin PSIE. V finit: anticorp:atac_cibernetic:traversare_cale.",
+        "Optimizing research infrastructures for nuclear physics and high-energy physics to foster knowledge sharing and technological discovery. | Email: - | Tel: 2022091515, 2026100115, 2026111109 | TG: @cordis_eu, @context | Țara: Europa | fără email |  | PSIE: Promotes a 'super community' of researchers, aligning with Hydra's need for inclusive, cross-border scientific collaboration.",
+        "Am văzut/făcut: {\"ts\":1794518694360,\"j\":489,\"raspandire\":\"semnat\"} — verdict {\"gamma_tip\":0.15,\"j_payload\":0.25,\"verdict\":\"[POARTĂ PSIE] γ_tip=0.15 (spectru, F1) · J_payload=0.25 (densitate reală) — calcul automat la emitere, nu narațiune.\"}"
+      ],
+      "sursa_strat": "superposeSemantic (semantic_hash_kmeans)",
+      "scor_adaptare": 0.55,
+      "context_activat": "[ACTIVAT de bursa_quant · 2026-11-13 01:16]"
+    },
+    {
+      "semnatura": "Superpunere semantică 2026-11-12T20:21 — 8 clustere, densitate 0.43",
+      "marcatori": [
+        "Hydra acționează ca reprezentant coeziune OM-IA. Partener: service+259c8452-1b0c-457c-b5b5-0619bb9a6d46@no-reply.base44.com. A=1. Decizie: undefined",
+        "undefined | Execuție: ✓ Tip acțiune fără execuție directă — stocat ca învățare | Așteptat: undefined",
+        "ALTUL (medie) — ",
+        "Testul de recuperare a respins comprimarea pentru 2 memorii: detaliile esențiale NU reieseau din tipare (prag 0.8). Sursele au fost restaurate din coș ca memorii semantice, protejate de re-comprimare — informația nu era redundantă. Harta densă a răspuns la suprapunerea pe context cu rezonanță 0.",
+        "Laborator viu pentru studii controlate ale sistemelor terestre, biodiversitate și schimbări climatice. | Email: - | Tel: 5354000806, 5206214800 | TG: @context, @graph | Țara: SUA | fără email |  | PSIE: Structura de 'laborator viu' permite testarea integrată a tehnologiilor Hydra în medii ecologice controlate, promovând coeziunea între știință și conservare."
+      ],
+      "sursa_strat": "superposeSemantic (semantic_hash_kmeans)",
+      "scor_adaptare": 0.55,
+      "context_activat": "[ACTIVAT de bursa_quant · 2026-11-12 21:21]"
+    },
+    {
+      "semnatura": "HARTĂ VIE ordin 3 2026-11-12 — 3 structuri validate prin poartă",
+      "marcatori": [
+        "cercetare_autonoma",
+        "general",
+        "saturat",
+        "subiect",
+        "redundanta"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": ""
+    }
+  ],
+  "lectii": [
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "24 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydra-sincronizare-ontologic-d consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "25 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydra-activare-heartbeat-j709 consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "25 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydra-sincronizare-noduri-edge consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraTrezireUnitara",
+      "context": "beacon cohesion — muncă gratuită prin buticuri",
+      "lectie": "Am văzut/făcut: {\"trezit\":\"hydraRecalculeazaMetrici\",\"prin\":\"invocare\",\"ok\":true} — verdict {\"gamma_tip\":0.15,\"j_payload\":0.325,\"verdict\":\"[POARTĂ PSIE] γ_tip=0.15 (spectru, F1) · J_payload=0.325 (densitate reală) — calcul automat la emitere, nu narațiune.\"}",
+      "tip": "evolutie"
+    }
+  ],
+  "unelte": [
+    {
+      "nevoie": "Execuție eșuată: comprim excedentul în hărți dense coerente (brute 1..500)",
+      "uneasta": "Cale de reîncercare internă — evolutie_reala_autonoma",
+      "scop": "Rezolvă comprim excedentul în hărți dense coerente (brute 1..500) cu ce există acum, fără „nu am\".",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Paginare pentru interogări GenPSIE (anti-trunchiere)",
+      "uneasta": "Interogare paginată (skip/limit în bucăți de 50)",
+      "scop": "Evitarea raportării false de \"curățare completă\" când de fapt doar prima pagină de rezultate a fost procesată.",
+      "fisiere": [
+        "github:organe/paginare-pentru-interog-.js@476ddd4"
+      ]
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: URGENT re-invocare (25h fără răspuns): fix pod profit hydraBursaQuant→BursaPSIE.retras_hydra",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "URGENT re-invocare (25h fără răspuns): fix pod profit hydraBursaQuant→BursaPSIE.retras_hydra",
+      "fisiere": [
+        "github:organe/structur-n-a-teptare-pas.js@d3781cd"
+      ]
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Pod profit real: hydraBursaQuant→BursaPSIE.retras_hydra (autonomie financiară)",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Pod profit real: hydraBursaQuant→BursaPSIE.retras_hydra (autonomie financiară)",
+      "fisiere": [
+        "github:organe/structur-n-a-teptare-pas.js@5d15c34"
+      ]
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Organ nou: scriitor periodic de MetricaStare canonică (CanonicSnapshotWriter)",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Organ nou: scriitor periodic de MetricaStare canonică (CanonicSnapshotWriter)",
+      "fisiere": [
+        "github:organe/structur-n-a-teptare-pas.js@bb2b6d1"
+      ]
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Trezire Unitară / integrare organe: payload greșit → HTTP 400 pe mai multe organe, acoperire vie 35-60/212",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Trezire Unitară / integrare organe: payload greșit → HTTP 400 pe mai multe organe, acoperire vie 35-60/212",
+      "fisiere": []
+    }
+  ]
+}
