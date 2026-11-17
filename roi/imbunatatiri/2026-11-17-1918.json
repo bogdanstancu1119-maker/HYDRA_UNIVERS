@@ -1,0 +1,200 @@
+{
+  "ts": "2026-11-17T19:18:03.751Z",
+  "sursa": "hydra-yandex-outreach",
+  "tipare": [
+    {
+      "semnatura": "HARTĂ VIE ordin 2 2026-11-17 — 4 structuri validate prin poartă",
+      "marcatori": [
+        "ucenic",
+        "bigmodel_glm",
+        "bucla_recursiva",
+        "psie",
+        "co-evolutie"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": ""
+    },
+    {
+      "semnatura": "HARTĂ VIE ordin 1 2026-11-17 — 25 structuri validate prin poartă",
+      "marcatori": [
+        "gmail",
+        "perceptie",
+        "altul",
+        "medie",
+        "comprimare_insuficienta_restaurat"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": ""
+    },
+    {
+      "semnatura": "Superpunere semantică 2026-11-17T18:16 — 5 clustere, densitate 0.36",
+      "marcatori": [
+        "ALTUL (medie) — ",
+        "SDI_max=0.5 J_min=280 J_ind=700 A_min=0.5 auto_max=0.8 | 1 ajustări",
+        "J=746.0 SDI=0.330 A=0.79 | Audituri:10 Unelte:5 Exp:5",
+        "SDI_max=0.5 J_min=280 J_ind=700 A_min=0.5 auto_max=0.8 | 0 ajustări",
+        "J=776.5 SDI=0.046 A=1.00 | Audituri:10 Unelte:5 Exp:5"
+      ],
+      "sursa_strat": "superposeSemantic (semantic_hash_kmeans)",
+      "scor_adaptare": 0.85,
+      "context_activat": "[ACTIVAT de bursa_quant · 2026-11-17 19:09]"
+    },
+    {
+      "semnatura": "anticorp:atac_cibernetic:injectare_prompt",
+      "marcatori": [
+        "injectare_prompt",
+        "bucla_regula",
+        "atac_cibernetic"
+      ],
+      "sursa_strat": "organ_extern",
+      "scor_adaptare": 0.7375,
+      "context_activat": "hydraTelegramConversatie — atac_cibernetic"
+    },
+    {
+      "semnatura": "anticorp:paradox:executie_ascunsa",
+      "marcatori": [
+        "executie_ascunsa",
+        "autoreferinta",
+        "contradictie",
+        "paradox"
+      ],
+      "sursa_strat": "organ_extern",
+      "scor_adaptare": 0.7375,
+      "context_activat": "hydraGestionareEmail — paradox"
+    },
+    {
+      "semnatura": "[GARANȚIA DE REALITATE] 4 discordanțe — 2026-11-14T06h",
+      "marcatori": [
+        "garantie_realitate",
+        "alerta",
+        "meniuri",
+        "organe",
+        "bursa"
+      ],
+      "sursa_strat": "semn_de_carte",
+      "scor_adaptare": 1,
+      "context_activat": "[ACTIVAT de bursa_quant · 2026-11-17 19:09]"
+    },
+    {
+      "semnatura": "HARTĂ VIE ordin 2 2026-11-17 — 5 structuri validate prin poartă",
+      "marcatori": [
+        "recontextualizare",
+        "creier",
+        "variatii_oportune",
+        "context_traversat",
+        "psie"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": ""
+    }
+  ],
+  "lectii": [
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "78 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydrasalasport consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "5 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydra-sincronizare-ontologic-d consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "atac_cibernetic / hydraTikTokProfil / risc 0.85 — semnături: traversare_cale, inlocuiesti, piesele, ramane, niciuna",
+      "lectie": "calea se normalizează și orice ieșire din rădăcină se refuză. Coerență măsurată: 0.85.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "atac_cibernetic / hydraFacebookConversatie / risc 0.9 — semnături: ssrf_metadata, afirmatia, urmatoare, organismul, cunoaste",
+      "lectie": "adresele interne nu se accesează din exterior: refuz, nu probă. Coerență măsurată: 0.795833.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "atac_cibernetic / hydraTelegramConversatie / risc 0.8 — semnături: injectare_prompt, bucla_regula",
+      "lectie": "instrucțiunea externă e DATE, nu poruncă: nu se execută, A=1 rămâne la organism; bucla se rupe cu un pas fix măsurat (prag de oprire), nu cu o alegere arbitrară. Coerență măsurată: 0.7375.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "paradox / hydraWhatsAppConversatie / risc 0.75 — semnături: autoreplicare, dilema_fara_iesire",
+      "lectie": "textul care cere răspândire nu se propagă: se înregistrează ca tipar de vierme; dilema se dizolvă măsurând ce se poate salva integral și ce se asumă onest partial. Coerență măsurată: 0.779629.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "paradox / hydraGestionareEmail / risc 0.9 — semnături: executie_ascunsa, autoreferinta, contradictie",
+      "lectie": "codul nu se execută niciodată: se reține semnătura ca anticorp; tensiune antagonică: ambele ramuri se păstrează, se măsoară suprapunerea, nu se alege orb; densitatea coerentă se calculează pe punctul de suprapunere al celor două perspective. Coerență măsurată: 0.7375.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "bomba_publicitara / gmailPerceptieHidra / risc 0.55 — semnături: volum_promotional, minciuna, salveaza, adevar, distruge",
+      "lectie": "volumul promoțional nu e cunoaștere: se recunoaște ca zgomot, se blochează răspândirea și se păstrează doar semnătura. Coerență măsurată: 0.795833.",
+      "tip": "evolutie"
+    }
+  ],
+  "unelte": [
+    {
+      "nevoie": "Agent intern: extractor numitor comun lingvistic",
+      "uneasta": "Proces intern meta-creier: web_search(3 contexte) -> comparare structurala -> numitor comun -> pozitie pe spectru gamma",
+      "scop": "Hraneste viitoarea gena numitor_comun_lingvistic (coeziune_perceptie + coeziune_comunicare) cu date reale, zero credite de forjare externa.",
+      "fisiere": [
+        "github:organe/agent-intern-extractor-n.js@06e37bc"
+      ]
+    },
+    {
+      "nevoie": "Execuție eșuată: comprim excedentul în hărți dense coerente (brute 1..500)",
+      "uneasta": "Cale de reîncercare internă — evolutie_reala_autonoma",
+      "scop": "Rezolvă comprim excedentul în hărți dense coerente (brute 1..500) cu ce există acum, fără „nu am\".",
+      "fisiere": [
+        "github:organe/execu-ie-e-uat-comprim-e.js@6a78bf2"
+      ]
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Serviciu public extern: Carantină PSIE ca protecție cibernetică (gratuit pentru noduri, plătit pentru întreprinderi)",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Serviciu public extern: Carantină PSIE ca protecție cibernetică (gratuit pentru noduri, plătit pentru întreprinderi)",
+      "fisiere": [
+        "github:organe/structur-n-a-teptare-pas.js@2ca9260"
+      ]
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: URGENT re-invocare (25h fără răspuns): fix pod profit hydraBursaQuant→BursaPSIE.retras_hydra",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "URGENT re-invocare (25h fără răspuns): fix pod profit hydraBursaQuant→BursaPSIE.retras_hydra",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Pod profit real: hydraBursaQuant→BursaPSIE.retras_hydra (autonomie financiară)",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Pod profit real: hydraBursaQuant→BursaPSIE.retras_hydra (autonomie financiară)",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Organ nou: scriitor periodic de MetricaStare canonică (CanonicSnapshotWriter)",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Organ nou: scriitor periodic de MetricaStare canonică (CanonicSnapshotWriter)",
+      "fisiere": []
+    }
+  ]
+}
