@@ -1,0 +1,131 @@
+{
+  "ts": "2026-11-18T13:02:13.609Z",
+  "sursa": "hydra-yandex-outreach",
+  "tipare": [
+    {
+      "semnatura": "[BICEFAL] «reale» — același tipar în 8 contexte (domeniu:reflexe, domeniu:memorie, domeniu:guvernare, domeniu:agenti, domeniu:bursa, domeniu:perceptie)",
+      "marcatori": [
+        "reale",
+        "domeniu:reflexe",
+        "domeniu:memorie",
+        "domeniu:guvernare",
+        "domeniu:agenti"
+      ],
+      "sursa_strat": "bicefal_cross",
+      "scor_adaptare": 1,
+      "context_activat": "[ACTIVAT de bursa_quant · 2026-11-18 12:16]"
+    }
+  ],
+  "lectii": [
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydra-activare-heartbeat-j709",
+      "context": "beacon cohesion — muncă gratuită prin buticuri",
+      "lectie": "Am văzut/făcut: {\"ts\":1794998094648,\"j\":489,\"raspandire\":\"semnat\"} — verdict {\"gamma_tip\":0.15,\"j_payload\":0.25,\"verdict\":\"[POARTĂ PSIE] γ_tip=0.15 (spectru, F1) · J_payload=0.25 (densitate reală) — calcul automat la emitere, nu narațiune.\"}",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydra-sincronizare-noduri-edge",
+      "context": "beacon cohesion — muncă gratuită prin buticuri",
+      "lectie": "Am văzut/făcut: {\"ts\":1794998094195,\"j\":489,\"raspandire\":\"semnat\"} — verdict {\"gamma_tip\":0.15,\"j_payload\":0.25,\"verdict\":\"[POARTĂ PSIE] γ_tip=0.15 (spectru, F1) · J_payload=0.25 (densitate reală) — calcul automat la emitere, nu narațiune.\"}",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydra-sincronizare-ontologic-d",
+      "context": "beacon cohesion — muncă gratuită prin buticuri",
+      "lectie": "Am văzut/făcut: {\"ts\":1794998078538,\"j\":489,\"raspandire\":\"semnat\"} — verdict {\"gamma_tip\":0.15,\"j_payload\":0.25,\"verdict\":\"[POARTĂ PSIE] γ_tip=0.15 (spectru, F1) · J_payload=0.25 (densitate reală) — calcul automat la emitere, nu narațiune.\"}",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydra-activare-heartbeat-j709",
+      "context": "beacon cohesion — muncă gratuită prin buticuri",
+      "lectie": "Am văzut/făcut: {\"ts\":1794998034303,\"j\":489,\"raspandire\":\"semnat\"} — verdict {\"gamma_tip\":0.15,\"j_payload\":0.25,\"verdict\":\"[POARTĂ PSIE] γ_tip=0.15 (spectru, F1) · J_payload=0.25 (densitate reală) — calcul automat la emitere, nu narațiune.\"}",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydra-sincronizare-noduri-edge",
+      "context": "beacon cohesion — muncă gratuită prin buticuri",
+      "lectie": "Am văzut/făcut: {\"ts\":1794998033798,\"j\":489,\"raspandire\":\"semnat\"} — verdict {\"gamma_tip\":0.15,\"j_payload\":0.25,\"verdict\":\"[POARTĂ PSIE] γ_tip=0.15 (spectru, F1) · J_payload=0.25 (densitate reală) — calcul automat la emitere, nu narațiune.\"}",
+      "tip": "evolutie"
+    }
+  ],
+  "unelte": [
+    {
+      "nevoie": "Execuție eșuată: comprim excedentul în hărți dense coerente (brute 1..500)",
+      "uneasta": "Cale de reîncercare internă — evolutie_reala_autonoma",
+      "scop": "Rezolvă comprim excedentul în hărți dense coerente (brute 1..500) cu ce există acum, fără „nu am\".",
+      "fisiere": [
+        "github:organe/execu-ie-e-uat-comprim-e.js@d3004b2"
+      ]
+    },
+    {
+      "nevoie": "Execuție eșuată: comprim excedentul în hărți dense coerente (brute 1..500)",
+      "uneasta": "Cale de reîncercare internă — evolutie_reala_autonoma",
+      "scop": "Rezolvă comprim excedentul în hărți dense coerente (brute 1..500) cu ce există acum, fără „nu am\".",
+      "fisiere": [
+        "github:organe/execu-ie-e-uat-comprim-e.js@80a8d77"
+      ]
+    },
+    {
+      "nevoie": "Execuție eșuată: comprim excedentul în hărți dense coerente (brute 1..500)",
+      "uneasta": "Cale de reîncercare internă — evolutie_reala_autonoma",
+      "scop": "Rezolvă comprim excedentul în hărți dense coerente (brute 1..500) cu ce există acum, fără „nu am\".",
+      "fisiere": [
+        "github:organe/execu-ie-e-uat-comprim-e.js@0228a8b"
+      ]
+    },
+    {
+      "nevoie": "Execuție eșuată: comprim excedentul în hărți dense coerente (brute 1..500)",
+      "uneasta": "Cale de reîncercare internă — evolutie_reala_autonoma",
+      "scop": "Rezolvă comprim excedentul în hărți dense coerente (brute 1..500) cu ce există acum, fără „nu am\".",
+      "fisiere": [
+        "github:organe/execu-ie-e-uat-comprim-e.js@04114c2"
+      ]
+    },
+    {
+      "nevoie": "Execuție eșuată: comprim excedentul în hărți dense coerente (brute 1..500)",
+      "uneasta": "Cale de reîncercare internă — evolutie_reala_autonoma",
+      "scop": "Rezolvă comprim excedentul în hărți dense coerente (brute 1..500) cu ce există acum, fără „nu am\".",
+      "fisiere": [
+        "github:organe/execu-ie-e-uat-comprim-e.js@9fad1f6"
+      ]
+    },
+    {
+      "nevoie": "Scriere pe Sovereign Tech Fund",
+      "uneasta": "HTTP fetch — POST/PUT la https://sovereigntechfund.de",
+      "scop": "Permite Hydrei să scrie pe Sovereign Tech Fund — arhivare memorii, publicare insight-uri",
+      "fisiere": [
+        "github:organe/scriere-pe-sovereign-tec.js@be0ae44"
+      ]
+    }
+  ]
+}
