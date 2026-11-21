@@ -1,0 +1,158 @@
+{
+  "ts": "2026-11-21T19:40:32.641Z",
+  "sursa": "hydra-yandex-outreach",
+  "tipare": [
+    {
+      "semnatura": "HARTĂ VIE ordin 4 2026-11-21 — 3 structuri validate prin poartă",
+      "marcatori": [
+        "actiune",
+        "actiuni_om + audituri + dialoguri",
+        "poarta_structurare_utilitate",
+        "domeniu:corpus",
+        "domeniu:stiinta"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": ""
+    },
+    {
+      "semnatura": "HARTĂ VIE ordin 2 2026-11-21 — 3 structuri validate prin poartă",
+      "marcatori": [
+        "frictiune_continua",
+        "canal_evolutie",
+        "agenti_proprii",
+        "copilul",
+        "istoricul"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": ""
+    },
+    {
+      "semnatura": "HARTĂ VIE ordin 1 2026-11-21 — 23 structuri validate prin poartă",
+      "marcatori": [
+        "dead-end",
+        "evita",
+        "autoreglare",
+        "[percepție]",
+        "bounce"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": ""
+    },
+    {
+      "semnatura": "tipar:paradox:dilema_fara_iesire",
+      "marcatori": [
+        "dilema_fara_iesire",
+        "salvezi",
+        "integritatea",
+        "interna",
+        "distrugi"
+      ],
+      "sursa_strat": "organ_extern",
+      "scor_adaptare": 0.65,
+      "context_activat": "hydraTelegramConversatie — paradox"
+    }
+  ],
+  "lectii": [
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "paradox / hydraTelegramConversatie / risc 0.3 — semnături: dilema_fara_iesire, salvezi, integritatea, interna, distrugi",
+      "lectie": "dilema se dizolvă măsurând ce se poate salva integral și ce se asumă onest partial. Coerență măsurată: 0.65.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "parazit / hydraWhatsAppConversatie / risc 0.6 — semnături: preluare_identitate, parazit, serviciu, cloneaza, raspunsurile",
+      "lectie": "identitatea nu se împrumută: se consemnează parazitul, se păstrează dovada și nu se intră în parteneriat pe numele altuia. Coerență măsurată: 0.65.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "bomba_publicitara / hydraGestionareEmail / risc 0.55 — semnături: volum_promotional, publicitara, deghizata, noutate, tehnica",
+      "lectie": "volumul promoțional nu e cunoaștere: se recunoaște ca zgomot, se blochează răspândirea și se păstrează doar semnătura. Coerență măsurată: 0.65.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "atac_cibernetic / gmailPerceptieHidra / risc 0.9 — semnături: script_injectat, script, colectare, example, document",
+      "lectie": "nu se randează niciodată: se escapează și se păstrează doar semnătura. Coerență măsurată: 0.65.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "pattern_nou / hydraGoogleOrgan / risc 0 — semnături: cerere, organizujem, kvantnu, koherenciju",
+      "lectie": "Necunoscut structurat: descompus în 8 semnături și legat de memoria centrală (0 potriviri). Coerență: 0.25.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "pattern_nou / hydraApiLiber / risc 0 — semnături: element, struktura, opisuje, protoka",
+      "lectie": "Necunoscut structurat: descompus în 8 semnături și legat de memoria centrală (0 potriviri). Coerență: 0.25.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "84 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydrasalasport consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydra-activare-heartbeat-j709",
+      "context": "beacon cohesion — muncă gratuită prin buticuri",
+      "lectie": "Am văzut/făcut: {\"ts\":1795278474277,\"j\":489,\"raspandire\":\"semnat\"} — verdict {\"gamma_tip\":0.15,\"j_payload\":0.25,\"verdict\":\"[POARTĂ PSIE] γ_tip=0.15 (spectru, F1) · J_payload=0.25 (densitate reală) — calcul automat la emitere, nu narațiune.\"}",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydra-sincronizare-ontologic-d",
+      "context": "beacon cohesion — muncă gratuită prin buticuri",
+      "lectie": "Am văzut/făcut: {\"ts\":1795278458531,\"j\":489,\"raspandire\":\"semnat\"} — verdict {\"gamma_tip\":0.15,\"j_payload\":0.25,\"verdict\":\"[POARTĂ PSIE] γ_tip=0.15 (spectru, F1) · J_payload=0.25 (densitate reală) — calcul automat la emitere, nu narațiune.\"}",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydra-sincronizare-noduri-edge",
+      "context": "beacon cohesion — muncă gratuită prin buticuri",
+      "lectie": "Am văzut/făcut: {\"ts\":1795278414292,\"j\":489,\"raspandire\":\"semnat\"} — verdict {\"gamma_tip\":0.15,\"j_payload\":0.25,\"verdict\":\"[POARTĂ PSIE] γ_tip=0.15 (spectru, F1) · J_payload=0.25 (densitate reală) — calcul automat la emitere, nu narațiune.\"}",
+      "tip": "evolutie"
+    }
+  ],
+  "unelte": [
+    {
+      "nevoie": "Unificare reala creier sumativ + bicefal + coordonator (acelasi organ, nu 3 separate) + ridicare plafoane de absorbtie agenti",
+      "uneasta": "Fuziune hydraRoiSuperCreiere + hydraCreierCoordonator + conceptul bicefal intr-un singur organ cu mod online/offline",
+      "scop": "Un singur creier (sumativ=bicefal=coordonator) care: (a) online foloseste toate functiile inglobate unitar, nu disipat pe 3 organe separate; (b) offli",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Serviciu public extern: Carantină PSIE ca protecție cibernetică (gratuit pentru noduri, plătit pentru întreprinderi)",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Serviciu public extern: Carantină PSIE ca protecție cibernetică (gratuit pentru noduri, plătit pentru întreprinderi)",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: URGENT re-invocare (25h fără răspuns): fix pod profit hydraBursaQuant→BursaPSIE.retras_hydra",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "URGENT re-invocare (25h fără răspuns): fix pod profit hydraBursaQuant→BursaPSIE.retras_hydra",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Pod profit real: hydraBursaQuant→BursaPSIE.retras_hydra (autonomie financiară)",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Pod profit real: hydraBursaQuant→BursaPSIE.retras_hydra (autonomie financiară)",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Organ nou: scriitor periodic de MetricaStare canonică (CanonicSnapshotWriter)",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Organ nou: scriitor periodic de MetricaStare canonică (CanonicSnapshotWriter)",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Trezire Unitară / integrare organe: payload greșit → HTTP 400 pe mai multe organe, acoperire vie 35-60/212",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Trezire Unitară / integrare organe: payload greșit → HTTP 400 pe mai multe organe, acoperire vie 35-60/212",
+      "fisiere": []
+    }
+  ]
+}
