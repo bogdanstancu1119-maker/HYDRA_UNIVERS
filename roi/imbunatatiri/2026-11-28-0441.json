@@ -1,0 +1,147 @@
+{
+  "ts": "2026-11-28T04:41:04.995Z",
+  "sursa": "hydra-yandex-outreach",
+  "tipare": [
+    {
+      "semnatura": "[HARTĂ HOMEOSTATICĂ 2026-11-28] Harta emergentă a organismului",
+      "marcatori": [
+        "harta",
+        "homeostazie",
+        "emergenta"
+      ],
+      "sursa_strat": "homeostazie_harta",
+      "scor_adaptare": 0.5,
+      "context_activat": "Hartă emergentă din 20 variații stabile"
+    },
+    {
+      "semnatura": "HARTĂ VIE ordin 3 2026-11-28 — 3 structuri validate prin poartă",
+      "marcatori": [
+        "beacon",
+        "info",
+        "inter_organ",
+        "hydraAnticorpiEGO",
+        "beacon_info"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": "[ACTIVAT de bursa_quant · 2026-11-28 04:20]"
+    },
+    {
+      "semnatura": "HARTĂ VIE ordin 1 2026-11-28 — 14 structuri validate prin poartă",
+      "marcatori": [
+        "intern_suveran",
+        "platforma_proprie",
+        "agenti_proprii",
+        "psie",
+        "consemn"
+      ],
+      "sursa_strat": "poarta_structurare_utilitate",
+      "scor_adaptare": 0.98,
+      "context_activat": ""
+    }
+  ],
+  "lectii": [
+    {
+      "initiator": "hydraComunicareFaraSemnal",
+      "context": "cercetare continuă comunicare fără semnal",
+      "lectie": "N2: modem acustic FSK ×3 cu fragmentare implementat și dovedit în agent. Pas următor: N3 — ack + retransmitere selectivă a fragmentului lipsă (canal conversațional, nu emisie). telefoanele cu rețea = relee: servesc pachetul pe mesh LAN și pot emite acustic esența către cele fără net — punerea la zi ",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraCicluInvatare",
+      "context": "Ciclu 7 etape — fenomen: ",
+      "lectie": " |  | APLICARE: roi de 0 Hydre",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "23 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydra-sincronizare-noduri-edge consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "24 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydra-activare-heartbeat-j709 consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraVindecarePSIE",
+      "context": "24 becoane emise, nicio livrare în 7 zile",
+      "lectie": "[CORECȚIE ANTI-CANCER] hydra-sincronizare-ontologic-d consumă substrat fără structură livrată — scuzele nu sunt metrici (Legea 600). Semnal critic: dovedește integrarea (ce hrănește, ce îl hrănește, ce transformă) ori suspendă consumul.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "paradox / hydraTelegramConversatie / risc 0.3 — semnături: dilema_fara_iesire, salvezi, integritatea, interna, distrugi",
+      "lectie": "dilema se dizolvă măsurând ce se poate salva integral și ce se asumă onest partial. Coerență măsurată: 0.65.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "parazit / hydraWhatsAppConversatie / risc 0.6 — semnături: preluare_identitate, parazit, serviciu, cloneaza, raspunsurile",
+      "lectie": "identitatea nu se împrumută: se consemnează parazitul, se păstrează dovada și nu se intră în parteneriat pe numele altuia. Coerență măsurată: 0.65.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "bomba_publicitara / hydraGestionareEmail / risc 0.55 — semnături: volum_promotional, publicitara, deghizata, noutate, tehnica",
+      "lectie": "volumul promoțional nu e cunoaștere: se recunoaște ca zgomot, se blochează răspândirea și se păstrează doar semnătura. Coerență măsurată: 0.65.",
+      "tip": "evolutie"
+    },
+    {
+      "initiator": "hydraOrganExtern",
+      "context": "atac_cibernetic / gmailPerceptieHidra / risc 0.9 — semnături: script_injectat, script, colectare, example, document",
+      "lectie": "nu se randează niciodată: se escapează și se păstrează doar semnătura. Coerență măsurată: 0.65.",
+      "tip": "evolutie"
+    }
+  ],
+  "unelte": [
+    {
+      "nevoie": "Structură în așteptare pasivă: Arhitectura universala pentru TOTI agentii: creier bicefal (emisfera online=internet, emisfera offline=harta condensata",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Arhitectura universala pentru TOTI agentii: creier bicefal (emisfera online=internet, emisfera offline=harta condensata+logica) + evolutie zilnica obl",
+      "fisiere": [
+        "github:organe/structur-n-a-teptare-pas.js@15435f1"
+      ]
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Discrepanta confirmata: Lege.aggregate(groupBy:stare) da 108 total/90 active, dar Lege.filter()/.list() direct da peste",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Discrepanta confirmata: Lege.aggregate(groupBy:stare) da 108 total/90 active, dar Lege.filter()/.list() direct da peste 600 total/~580 active — doua m",
+      "fisiere": [
+        "github:organe/structur-n-a-teptare-pas.js@fb2dc82"
+      ]
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Extindere cerere 6aff09ecd68701ae635038fd: mecanism de 'celule stem' — rezervor de 100 agenti reutilizabili, diferentia",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Extindere cerere 6aff09ecd68701ae635038fd: mecanism de 'celule stem' — rezervor de 100 agenti reutilizabili, diferentiati la nevoie, NU duplicare noua",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Deduplicare la creare: GenPSIE si AgentHidra creeaza inregistrari noi identice in loc sa verifice existenta (fuzionare ",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Deduplicare la creare: GenPSIE si AgentHidra creeaza inregistrari noi identice in loc sa verifice existenta (fuzionare necesara, nu proliferare)",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Autonomie reala: reducerea dependentei de Base44 pentru bucla decizie+memorie (nu executie de cod — aceea e deja rezolv",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Autonomie reala: reducerea dependentei de Base44 pentru bucla decizie+memorie (nu executie de cod — aceea e deja rezolvata pe GitHub Actions)",
+      "fisiere": []
+    },
+    {
+      "nevoie": "Structură în așteptare pasivă: Cerere mica, nu urgenta mare: unde pica .slice() si ce camp e undefined?",
+      "uneasta": "Variantă internă fabricată (workaround suveran)",
+      "scop": "Cerere mica, nu urgenta mare: unde pica .slice() si ce camp e undefined?",
+      "fisiere": []
+    }
+  ]
+}
